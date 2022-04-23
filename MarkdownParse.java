@@ -19,6 +19,10 @@ public class MarkdownParse {
             int closeParen = markdown.indexOf(")", openParen);
             currentIndex = closeParen + 1;
 
+            System.out.println("open bracket: " + openBracket);
+            int temp = openBracket-1;
+            System.out.println("! index: " + temp);
+            System.out.println("index 10 is: " + markdown.charAt(10));
             if (openBracket > 0 && markdown.charAt(openBracket - 1) == '!') {
                 currentIndex = closeParen;
                 continue;
@@ -29,6 +33,7 @@ public class MarkdownParse {
             }
             else {
                 charIndex = currentIndex;
+                System.out.println("Addiding: " + markdown.substring(openParen + 1, closeParen));
                 toReturn.add(markdown.substring(openParen + 1, closeParen));
             }
 
