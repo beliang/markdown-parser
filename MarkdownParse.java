@@ -11,42 +11,39 @@ public class MarkdownParse {
         ArrayList<String> toReturn = new ArrayList<>();
         // find the next [, then find the ], then find the (, then read link upto next )
         int currentIndex = 0;
+        int charIndex = 0;
         while(currentIndex < markdown.length()) {
             int openBracket = markdown.indexOf("[", currentIndex);
             int closeBracket = markdown.indexOf("]", openBracket);
             int openParen = markdown.indexOf("(", closeBracket);
             int closeParen = markdown.indexOf(")", openParen);
-            if(openBracket == -1 || closeBracket == -1 || openParen == -1 || closeParen == -1)
-            {
-                break;
-            }
-            
-            if(closeParen < 0)
-            {
-                currentIndex = markdown.length();
-            }
-            else
-            {
-                currentIndex = closeParen + 1;
-            }
-            if(openBracket > 0 && markdown.charAt(openBracket-1) == '!')
-            {
-                currentIndex = closeParen + 1;
+            currentIndex = closeParen + 1;
+
+            if (openBracket > 0 && markdown.charAt(openBracket - 1) == '!') {
+                currentIndex = closeParen;
                 continue;
             }
-            else if(closeBracket + 1 != openParen)
-            {
-                currentIndex = closeParen + 1;
-                continue;
+
+            if (currentIndex <= charIndex) {
+                charIndex ++;
             }
-            else if(openParen > -1 && openParen < closeParen)
-            {
+            else {
+                charIndex = currentIndex;
                 toReturn.add(markdown.substring(openParen + 1, closeParen));
             }
-            
+
+            if (charIndex == markdown.length() - 1) {
+                System.out.println(markdown);
+                System.out.println(toReturn);
+                return toReturn;
+            }
+
+            //toReturn.add(markdown.substring(openParen + 1, closeParen));
 
         }
 
+        System.out.println(markdown);
+        System.out.println(toReturn);
         return toReturn;
     }
 
@@ -56,5 +53,8 @@ public class MarkdownParse {
         String content = Files.readString(fileName);
         ArrayList<String> links = getLinks(content);
 	    System.out.println(links);
+
+        System.out.println("lab4");
+        System.out.println(MarkdownParse.getLinks("part4-file.md"));
     }
 }
