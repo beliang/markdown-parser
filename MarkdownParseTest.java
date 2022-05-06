@@ -2,9 +2,8 @@ import java.util.ArrayList;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import static org.junit.Assert.*;
-
 import org.junit.*;
+import static org.junit.Assert.*;
 
 public class MarkdownParseTest {
 
@@ -123,25 +122,25 @@ public class MarkdownParseTest {
         assertEquals(test, MarkdownParse.getLinks(content));
     }
 
-    @Test // error
-    public void testFile7() throws IOException
-    {
-        ArrayList<String> test = new ArrayList<String>();
-        System.out.println("Testing file test");
-        Path fileName = Path.of("test-file7.md");
-        String content = Files.readString(fileName);
-
-        assertEquals(test, MarkdownParse.getLinks(content));
-    }
-
     // @Test // error
-    // public void testFile8() throws IOException
+    // public void testFile7() throws IOException
     // {
     //     ArrayList<String> test = new ArrayList<String>();
     //     System.out.println("Testing file test");
-    //     Path fileName = Path.of("test-file8.md");
+    //     Path fileName = Path.of("test-file7.md");
     //     String content = Files.readString(fileName);
 
     //     assertEquals(test, MarkdownParse.getLinks(content));
     // }
+
+    @Test // error
+    public void testFile8() throws IOException
+    {
+        ArrayList<String> test = new ArrayList<String>();
+        System.out.println("Testing file test");
+        Path fileName = Path.of("test-file8.md");
+        String content = Files.readString(fileName);
+
+        assertEquals(test, MarkdownParse.getLinks(content));
+    }
 }
